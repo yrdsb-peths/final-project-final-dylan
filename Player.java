@@ -12,11 +12,13 @@ public class Player extends Actor
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    //Basic stats of the player
     public double health;
     public int armourLevel;
     public double stam;
     public int speed;
     
+    //Equipment the player has
     private boolean pickaxeEquip = false;
     
     private boolean gunEquip = false;
@@ -34,16 +36,21 @@ public class Player extends Actor
     
     public void act()
     {
+        //Movement mechanics
         if(Greenfoot.isKeyDown("w")) {
             setLocation(getX(), getY() - speed);
         } else if(Greenfoot.isKeyDown("s")) {
             setLocation(getX(), getY() + speed);
         }
-        
         if(Greenfoot.isKeyDown("a")) {
             setLocation(getX() - speed, getY());
         } else if(Greenfoot.isKeyDown("d")) {
             setLocation(getX() + speed, getY());
+        }
+        
+        
+        if(gunEquip == true) {
+            //shootGun;
         }
     }
 }
