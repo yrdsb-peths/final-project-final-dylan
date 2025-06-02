@@ -6,17 +6,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Player extends Actor
+public class Player extends SmoothMover
 {
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     //Basic stats of the player
-    public double health;
-    public int armourLevel;
-    public double stam;
-    public int speed;
+    private double health;
+    private int armourLevel;
+    private double stam;
+    private double speed;
     
     //Equipment the player has
     private boolean pickaxeEquip = false;
@@ -25,32 +25,57 @@ public class Player extends Actor
     private int ammoCount = 70;
     
     private boolean daggerEquip = false;
-    
+    MyWorld w = (MyWorld) getWorld();
     public Player() {
         setImage("images/characterPlayer.png");
         health = 100.0;
         armourLevel = 0;
         stam = 10.0;
-        speed = 1;
+        speed = 1.5;
     }
     
     public void act()
     {
         //Movement mechanics
         if(Greenfoot.isKeyDown("w")) {
-            setLocation(getX(), getY() - speed);
+            setLocation(getExactX(), getExactY() - speed);
         } else if(Greenfoot.isKeyDown("s")) {
-            setLocation(getX(), getY() + speed);
+            setLocation(getExactX(), getExactY() + speed);
         }
         if(Greenfoot.isKeyDown("a")) {
-            setLocation(getX() - speed, getY());
+            setLocation(getExactX() - speed, getExactY());
         } else if(Greenfoot.isKeyDown("d")) {
-            setLocation(getX() + speed, getY());
+            setLocation(getExactX() + speed, getExactY());
         }
         
-        
-        if(gunEquip == true) {
-            //shootGun;
+        //"inventory" keys
+        if(Greenfoot.isKeyDown("1") && pickaxeEquip != true) {
+            pickaxeEquip = true;
+            gunEquip = false;
+            daggerEquip = false;
         }
+        if(Greenfoot.isKeyDown("2") && gunEquip != true) {
+            pickaxeEquip = false;
+            gunEquip = true;
+            daggerEquip = false;
+        }
+        if(Greenfoot.isKeyDown("3") && daggerEquip != true) {
+            pickaxeEquip = false;
+            gunEquip = false;
+            daggerEquip = true;
+        }
+        
+        if(gunEquip == true && Greenfoot.mouseClicked(true)) {
+            shootGun();
+        }
+        Cursor cursor = new Cursor();
+        w.addObject(cursor, getX(), getY());
+        //turnTowards(cursor.getX(), cursor.getY());
+    }
+    
+    public void shootGun() {
+        Bullet bullet = new Bullet();
+        w.addObject(bullet, getX(), getY());
+        bullet.setRotation(getRotation());
     }
 }
