@@ -19,13 +19,12 @@ public class Player extends SmoothMover
     private double speed;
     
     //Equipment the player has
-    private boolean pickaxeEquip = false;
-    private boolean gunEquip = false;
-    private int ammoCount = 70;    
-    private boolean daggerEquip = false;
+    private boolean pickaxeEquip;
+    private boolean gunEquip;
+    private int ammoCount;    
+    private boolean daggerEquip;
     
-    MyWorld world = (MyWorld) getWorld();
-    
+    MyWorld MyWorld = (MyWorld) getWorld();
     
     public Player() {
         setImage("images/characterPlayer.png");
@@ -33,6 +32,11 @@ public class Player extends SmoothMover
         armourLevel = 0;
         stam = 10.0;
         speed = 1.5;
+        
+        pickaxeEquip = true;
+        gunEquip = false;
+        ammoCount = 70;
+        daggerEquip = false;
     }
     
     public void act()
@@ -67,7 +71,7 @@ public class Player extends SmoothMover
         }
         
         //attack mechanisms
-        if(gunEquip == true && Greenfoot.mouseClicked(true)) {
+        if(gunEquip == true && Greenfoot.mouseClicked(null)) {
             if(ammoCount > 0) {
                 shootGun();
             }
@@ -88,18 +92,18 @@ public class Player extends SmoothMover
     
     public void shootGun() {
         Bullet bullet = new Bullet();
-        world.addObject(bullet, getX(), getY());
+        MyWorld.addObject(bullet, getX(), getY());
         bullet.setRotation(getRotation());
         ammoCount--;
     }
     
     HitScanBox c = new HitScanBox();
     public void stab() {
-        world.addObject(c, getX(), getY());
+        MyWorld.addObject(c, getX(), getY());
         //animate a stab motion
-        world.getObjectsAt(c.getX(), c.getY(), Enemy.class);
+        MyWorld.getObjectsAt(c.getX(), c.getY(), Enemy.class);
         
-        world.removeObject(c);
+        MyWorld.removeObject(c);
     }
     public void mine() {
         
