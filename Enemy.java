@@ -28,15 +28,21 @@ public class Enemy extends Actor
     public void act()
     {
         if(isTouching(Bullet.class)) {
-            //takeDamage();
+            takeDamageBullet();
+        }
+        if(isTouching(HitScanBox.class)) {
+            takeDamageMelee();
         }
         if(health < 0) {
             dead = true;
         }
     }
     
-    public void takeDamage() {
+    public void takeDamageBullet() {
         removeTouching(Bullet.class);
         health -= 50;
+    }
+    public void takeDamageMelee() {
+        health -= 30;
     }
 }
