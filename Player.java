@@ -92,8 +92,8 @@ public class Player extends SmoothMover
     
     public void shootGun() {
         Bullet bullet = new Bullet();
-        MyWorld.addObject(bullet, getX(), getY());
         bullet.setRotation(getRotation());
+        getWorld().addObject(bullet, getX(), getY());
         ammoCount--;
     }
     
