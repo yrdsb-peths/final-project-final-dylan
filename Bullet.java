@@ -14,6 +14,7 @@ public class Bullet extends Actor
      */
     public Bullet() {
         setImage("images/bullet.png");
+        setRotation(getRotation());
     }
     
     public void act()
