@@ -13,9 +13,11 @@ public class LevelTwo extends World
      * Constructor for objects of class LevelTwo.
      * 
      */
+    GreenfootImage level2 = new GreenfootImage("images/level 2.png");
     public LevelTwo()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(700, 700, 1); 
+        setBackground(level2);
     }
 }

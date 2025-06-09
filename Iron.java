@@ -12,6 +12,10 @@ public class Iron extends Ore
      * Act - do whatever the Iron wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public Iron() {
+        super(700, 200);
+    }
+    
     public void act()
     {
         // Add your action code here.

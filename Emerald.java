@@ -12,6 +12,10 @@ public class Emerald extends Ore
      * Act - do whatever the Emerald wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public Emerald() {
+        super(500, 1600);
+    }
+    
     public void act()
     {
         // Add your action code here.

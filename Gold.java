@@ -12,6 +12,10 @@ public class Gold extends Ore
      * Act - do whatever the Gold wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public Gold() {
+        super(300, 1000);
+    }
+    
     public void act()
     {
         // Add your action code here.

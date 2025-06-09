@@ -12,6 +12,11 @@ public class Dirt extends Block
      * Act - do whatever the Dirt wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+
+    public Dirt() {
+        super();
+    }
+    
     public void act()
     {
         // Add your action code here.

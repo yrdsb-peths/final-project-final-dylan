@@ -13,21 +13,21 @@ public class Player extends SmoothMover
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     //Basic stats of the player
-    private double health;
-    private int armourLevel;
-    private double stam;
-    private double speed;
+    private static double health;
+    private static int armourLevel;
+    private static double stam;
+    private static double speed;
     
     //Equipment the player has
     private boolean pickaxeEquip;
     private boolean gunEquip;
-    private int ammoCount;    
+    private static int ammoCount;    
     private boolean daggerEquip;
     
     MyWorld MyWorld = (MyWorld) getWorld();
-    
+    GreenfootImage player = new GreenfootImage("images/characterPlayer.png");
     public Player() {
-        setImage("images/characterPlayer.png");
+        setImage(player);
         health = 100.0;
         armourLevel = 0;
         stam = 10.0;
@@ -99,11 +99,10 @@ public class Player extends SmoothMover
     
     HitScanBox c = new HitScanBox();
     public void stab() {
-        MyWorld.addObject(c, getX(), getY());
+        getWorld().addObject(c, getX(), getY());
         //animate a stab motion
-        MyWorld.getObjectsAt(c.getX(), c.getY(), Enemy.class);
-        
-        MyWorld.removeObject(c);
+        getWorld().getObjectsAt(c.getX(), c.getY(), Enemy.class);
+        getWorld().removeObject(c);
     }
     public void mine() {
         
