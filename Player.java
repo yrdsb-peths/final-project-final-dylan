@@ -12,6 +12,8 @@ public class Player extends SmoothMover
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public static int money;
+    
     //Basic stats of the player
     private static double health;
     private static int armourLevel;
@@ -44,13 +46,25 @@ public class Player extends SmoothMover
         //Movement mechanics
         if(Greenfoot.isKeyDown("w")) {
             setLocation(getExactX(), getExactY() - speed);
+            if(isTouching(Block.class)) {
+                setLocation(getExactX(), getExactY() + speed);
+            }
         } else if(Greenfoot.isKeyDown("s")) {
             setLocation(getExactX(), getExactY() + speed);
+            if(isTouching(Block.class)) {
+                setLocation(getExactX(), getExactY() - speed);
+            }
         }
         if(Greenfoot.isKeyDown("a")) {
             setLocation(getExactX() - speed, getExactY());
+            if(isTouching(Block.class)) {
+                setLocation(getExactX() + speed, getExactY());
+            }
         } else if(Greenfoot.isKeyDown("d")) {
             setLocation(getExactX() + speed, getExactY());
+            if(isTouching(Block.class)) {
+                setLocation(getExactX() - speed, getExactY());
+            }
         }
         
         //"inventory" keys

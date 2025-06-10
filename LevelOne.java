@@ -18,5 +18,7 @@ public class LevelOne extends World
     {    
         super(600, 500, 1); 
         setBackground("images/level 1.png");
+        Block d = new Dirt(40, 40, 10, 10);
+        addObject(d, 40, 40);
     }
 }
