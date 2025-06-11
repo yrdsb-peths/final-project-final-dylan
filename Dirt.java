@@ -13,15 +13,14 @@ public class Dirt extends Block
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public Dirt(int x, int y, int w, int h) {
-        super();
-        GreenfootImage model = new GreenfootImage(w, h);
-        model.drawRect(x, y, w, h);
-        model.fillRect(x, y, w, h);
+    GreenfootImage dirt = new GreenfootImage("images/dirt.png");;
+    public Dirt(int w, int h) {
+        dirt.scale(w, h);
+        setImage(dirt);
     }
     
     public void act()
     {
-        // Add your action code here.
+        
     }
 }
