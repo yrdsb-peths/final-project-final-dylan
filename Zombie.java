@@ -11,17 +11,67 @@ public class Zombie extends Enemy
     /**
      * Act - do whatever the Zombie wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    
+     */  
+
+    GreenfootImage norZom = new GreenfootImage("images/enemies/zombie.png");
     public Zombie(double health, double damage, int speed) {
         super(health, damage, speed);
-        if(health >= 200 && damage <= 30 && speed <= 1) {
-            //setImage("images/tankZombie.png");
-        }
+        setImage(norZom);
     }
     
     public void act()
     {
-        // Add your action code here.
+        Player player = (Player)getWorld().getObjects(Player.class).get(0);
+        
+        if(engaged == true) {
+            turnTowards(player.getX(), player.getY());
+            move(speed);
+            if(isTouching(Block.class)) {
+                move(-speed);
+            }
+        }
+        if(isTouching(Bullet.class)) {
+            takeDamageBullet();
+        }
+        if(isTouching(HitScanPlayerMelee.class)) {
+            takeDamageMelee();
+        }
+        if(isTouching(HitScanPlayerMine.class)) {
+            takeDamagePickaxe();
+        }
+        if(health <= 0) {
+            getWorld().removeObject(this);
+        }
+        ifHit();
+    }
+    
+    SimpleTimer hitTimer = new SimpleTimer();
+    public void takeDamageBullet() {
+        health -= 50.0;
+        removeTouching(Bullet.class);
+        hitTimer.mark();
+        setImage("images/enemies/zombieDamaged.png");
+    }
+    public void takeDamagePickaxe() {
+        health -= 140.0 + Greenfoot.getRandomNumber(100);
+        removeTouching(HitScanPlayerMine.class);
+        hitTimer.mark();
+        setImage("images/enemies/zombieDamaged.png");
+    }
+    int slashCritRoll;
+    public void takeDamageMelee() {
+        slashCritRoll = Greenfoot.getRandomNumber(50);
+        removeTouching(HitScanPlayer.class);
+        hitTimer.mark();
+        if(Greenfoot.getRandomNumber(50) == slashCritRoll) {
+            health -= 1000.0;
+        }
+        health -= 30.0;
+        setImage("images/enemies/zombieDamaged.png");
+    }
+    public void ifHit() {
+        if(hitTimer.millisElapsed() >= 200) {
+            setImage(norZom);
+        } 
     }
 }

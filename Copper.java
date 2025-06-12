@@ -14,6 +14,7 @@ public class Copper extends Ore
      */
     public Copper() {
         super(100, 100);
+        setImage("images/blocks/copperOre.png");
     }
     
     public void act()

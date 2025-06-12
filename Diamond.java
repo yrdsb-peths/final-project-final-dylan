@@ -14,6 +14,7 @@ public class Diamond extends Ore
      */
     public Diamond() {
         super(1600, 8000);
+        setImage("images/blocks/diamondOre.png");
     }
     
     public void act()

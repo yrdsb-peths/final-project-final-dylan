@@ -15,13 +15,18 @@ public class Ore extends Block
     public int health;
     public int value;
     public Ore(int health, int value) {
-        super();
         this.health = health;
         this.value = value;
     }
     
     public void act()
     {
-        // Add your action code here.
+        if(health >= 0) {
+            mined();
+        }
+    }
+    public void mined() {
+        getWorld().removeObject(this);
+        Player.money += value;
     }
 }

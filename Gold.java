@@ -13,7 +13,8 @@ public class Gold extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Gold() {
-        super(300, 1000);
+        super(300, 2000);
+        setImage("images/blocks/goldOre.png");
     }
     
     public void act()

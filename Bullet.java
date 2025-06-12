@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Bullet extends Actor
+public class Bullet extends SmoothMover
 {
     /**
      * Act - do whatever the Bullet wants to do. This method is called whenever
@@ -14,12 +14,11 @@ public class Bullet extends Actor
      */
     public Bullet() {
         setImage("images/bullet.png");
-        setRotation(getRotation());
     }
     
     public void act()
     {
-        move(30);
+        move(10);
         if(isAtEdge()) {
             getWorld().removeObject(this);
         } else if(isTouching(Block.class)) {

@@ -1,22 +1,17 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Iron here.
+ * Write a description of class EnemySensor here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Iron extends Ore
+public class EnemySensor extends Actor
 {
     /**
-     * Act - do whatever the Iron wants to do. This method is called whenever
+     * Act - do whatever the EnemySensor wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Iron() {
-        super(600, 200);
-        setImage("images/blocks/ironOre.png");
-    }
-    
     public void act()
     {
         // Add your action code here.

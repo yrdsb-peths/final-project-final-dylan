@@ -6,14 +6,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Emerald extends Ore
+public class Silver extends Ore
 {
     /**
      * Act - do whatever the Emerald wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Emerald() {
-        super(500, 1600);
+    public Silver() {
+        super(400, 1500);
+        setImage("images/blocks/silverOre.png");
     }
     
     public void act()

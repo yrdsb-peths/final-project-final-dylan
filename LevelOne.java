@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class LevelOne extends World
+public class LevelOne extends Levels
 {
 
     /**
@@ -16,14 +16,24 @@ public class LevelOne extends World
     GreenfootImage level1 = new GreenfootImage("images/level 1.png");
     Block dirt;
     Block stone;
+    Player player;
+    Zombie zombie;
     public LevelOne()
     {    
         super(600, 500, 1); 
         setBackground("images/level 1.png");
-        prepare();
+        player = new Player();
+        addObject(player, 26, 256);
+        prepareBlocks();
+        addObject(new Zombie(100.0, 10.0, 1), 100, 100);
+        addObject(new Zombie(1000.0, 10.0, 1), 200, 75);
     }
     
-    private void prepare() {
+    public void act() {
+        
+    }
+    
+    private void prepareBlocks() {
         dirt = new Dirt(5, 198);
         addObject(dirt, 10, 107);
         dirt = new Dirt(100, 5);
@@ -39,8 +49,10 @@ public class LevelOne extends World
         addObject(stone, 60, 215);
         stone = new Stone(7, 80);
         addObject(stone, 120, 180);
-        stone = new Stone(270, 40);
-        addObject(stone, 257, 40);
+        stone = new Stone(270, 50);
+        addObject(stone, 257, 30);
+        stone = new Stone(7, 80);
+        addObject(stone, 118, 55);
         
         stone = new Stone(140, 160);
         addObject(stone, 245, 175);
@@ -67,5 +79,22 @@ public class LevelOne extends World
         addObject(stone, 440, 457);
         stone = new Stone(85, 200);
         addObject(stone, 560, 370);
+        stone = new Stone(220, 45);
+        addObject(stone, 500, 208);
+        
+        dirt = new Dirt(190, 5);
+        addObject(dirt, 495, 14);
+        dirt = new Dirt(190, 5);
+        addObject(dirt, 495, 182);
+        dirt = new Dirt(5, 170);
+        addObject(dirt, 588, 100);
+        dirt = new Dirt(5, 68);
+        addObject(dirt, 398, 50);
+        dirt = new Dirt(5, 68);
+        addObject(dirt, 398, 150);
+        stone = new Stone(25, 68);
+        addObject(stone, 380, 50);
+        stone = new Stone(25, 108);
+        addObject(stone, 381, 170);
     }
 }
