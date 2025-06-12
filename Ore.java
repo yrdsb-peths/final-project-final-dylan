@@ -19,14 +19,13 @@ public class Ore extends Block
         this.value = value;
     }
     
-    public void act()
-    {
-        if(health >= 0) {
-            mined();
-        }
+    public void pickaxeStrike() {
+        removeTouching(HitScanPlayerMine.class);
+        health -= 70;
     }
     public void mined() {
-        getWorld().removeObject(this);
+        removeTouching(HitScanPlayerMine.class);
         Player.money += value;
+        getWorld().removeObject(this);
     }
 }

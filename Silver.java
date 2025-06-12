@@ -13,12 +13,20 @@ public class Silver extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Silver() {
-        super(400, 1500);
+        super(300 + Greenfoot.getRandomNumber(400), 1200 + Greenfoot.getRandomNumber(1000));
         setImage("images/blocks/silverOre.png");
     }
     
     public void act()
     {
-        // Add your action code here.
+        if(isTouching(HitScanPlayerMine.class) && health > 0) {
+            pickaxeStrike();
+        }
+        if(health < health / 2) {
+            //setImage("images/blocks/copperOreBreaking.png");
+        }
+        if(health <= 0) {
+            mined();
+        }
     }
 }

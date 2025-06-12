@@ -13,12 +13,23 @@ public class Diamond extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Diamond() {
-        super(1600, 8000);
+        super(1400 + Greenfoot.getRandomNumber(400), 7000 + Greenfoot.getRandomNumber(2000));
         setImage("images/blocks/diamondOre.png");
     }
     
     public void act()
     {
-        // Add your action code here.
+        if(isTouching(HitScanPlayerMine.class) && health > 0) {
+            pickaxeStrike();
+        }
+        if(health < health * (2 / 3)) {
+            //setImage("images/blocks/diamondOreBreaking.png");
+        }
+        if(health < health / 3) {
+            //setImage("images/blocks/diamondOreBreaking2.png");
+        }
+        if(health <= 0) {
+            mined();
+        }
     }
 }

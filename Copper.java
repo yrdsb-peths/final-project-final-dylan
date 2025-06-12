@@ -13,12 +13,20 @@ public class Copper extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Copper() {
-        super(100, 100);
+        super(75 + Greenfoot.getRandomNumber(100), 100 + Greenfoot.getRandomNumber(200));
         setImage("images/blocks/copperOre.png");
     }
     
     public void act()
     {
-        // Add your action code here.
+        if(isTouching(HitScanPlayerMine.class) && health > 0) {
+            pickaxeStrike();
+        }
+        if(health < health / 2) {
+            //setImage("images/blocks/copperOreBreaking.png");
+        }
+        if(health <= 0) {
+            mined();
+        }
     }
 }
