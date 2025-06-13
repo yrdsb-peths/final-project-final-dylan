@@ -1,20 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Gold here.
+ * Write a description of class Emerald here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Gold extends Ore
+public class Silver extends Ore
 {
     /**
-     * Act - do whatever the Gold wants to do. This method is called whenever
+     * Act - do whatever the Emerald wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Gold() {
-        super(200 + Greenfoot.getRandomNumber(300), 1600 + Greenfoot.getRandomNumber(1000));
-        setImage("images/blocks/goldOre.png");
+    public Silver() {
+        super(300 + Greenfoot.getRandomNumber(400), 1200 + Greenfoot.getRandomNumber(1000));
+        setImage("images/blocks/silverOre.png");
     }
     
     public void act()
@@ -23,7 +23,7 @@ public class Gold extends Ore
             pickaxeStrike();
         }
         if(health < health / 2) {
-            //setImage("images/blocks/goldOreBreaking.png");
+            //setImage("images/blocks/copperOreBreaking.png");
         }
         if(health <= 0) {
             mined();
