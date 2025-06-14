@@ -27,4 +27,5 @@ public abstract class Enemy extends SmoothMover
     public abstract void takeDamageBullet();
     public abstract void takeDamageMelee();
     public abstract void takeDamagePickaxe();
+    public abstract void playerTrack();
 }

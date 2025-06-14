@@ -12,12 +12,16 @@ public class Miner extends Enemy
      * Act - do whatever the Miner wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    EnemySensor detectionCheck;
+    Player player;
     public Miner(double health, double damage, int speed) {
         super(health, damage, speed);
+        detectionCheck = new EnemySensor(300);
+        //setImage("images/enemies/miner.png");
     }
     public void act()
     {
-        Player player = (Player)getWorld().getObjects(Player.class).get(0);
+        player = (Player)getWorld().getObjects(Player.class).get(0);
         
         if(engaged == true) {
             turnTowards(player.getX(), player.getY());
@@ -25,6 +29,8 @@ public class Miner extends Enemy
             if(isTouching(Block.class)) {
                 move(-speed);
             }
+        } else {
+            playerTrack();
         }
         if(isTouching(Bullet.class)) {
             takeDamageBullet();
@@ -71,4 +77,14 @@ public class Miner extends Enemy
             //setImage(miner);
         } 
     }
+    public void playerTrack() {
+        detectionCheck.setLocation((Math.abs(getX() + player.getX()) / 2), (Math.abs(getY() + player.getY()) / 2));
+        detectionCheck.scale((int) Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))), 2);
+        detectionCheck.turnTowards(player.getX(), player.getY());
+        if(!detectionCheck.isTouching && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 200) {
+            engaged = true;
+        }
+    }
+    
+    SimpleTimer atkCooldown = new SimpleTimer();
 }

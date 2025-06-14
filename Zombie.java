@@ -14,21 +14,26 @@ public class Zombie extends Enemy
      */  
 
     GreenfootImage norZom = new GreenfootImage("images/enemies/zombie.png");
+    EnemySensor detectionCheck;
+    Player player;
     public Zombie(double health, double damage, int speed) {
         super(health, damage, speed);
         setImage(norZom);
+        detectionCheck = new EnemySensor(300);
     }
     
     public void act()
     {
-        Player player = (Player)getWorld().getObjects(Player.class).get(0);
-        
+        player = (Player)getWorld().getObjects(Player.class).get(0);
+        getWorld().addObject(detectionCheck, getX(), getY());
         if(engaged == true) {
             turnTowards(player.getX(), player.getY());
             move(speed);
             if(isTouching(Block.class)) {
                 move(-speed);
             }
+        } else {
+            playerTrack();
         }
         if(isTouching(Bullet.class)) {
             takeDamageBullet();
@@ -74,4 +79,14 @@ public class Zombie extends Enemy
             setImage(norZom);
         } 
     }
+    public void playerTrack() {
+        detectionCheck.setLocation((Math.abs(getX() + player.getX()) / 2), (Math.abs(getY() + player.getY()) / 2));
+        detectionCheck.scale((int) Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))), 2);
+        detectionCheck.turnTowards(player.getX(), player.getY());
+        if(!detectionCheck.isTouching && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 100) {
+            engaged = true;
+        }
+    }
+    
+    SimpleTimer atkCooldown = new SimpleTimer();
 }

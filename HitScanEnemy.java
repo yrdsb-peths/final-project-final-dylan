@@ -12,8 +12,15 @@ public class HitScanEnemy extends Actor
      * Act - do whatever the HitScanEnemy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    SimpleTimer removal = new SimpleTimer();
+    public HitScanEnemy() {
+        setImage("images/hitScanBox.png");
+        removal.mark();
+    }
     public void act()
     {
-        // Add your action code here.
+        if(removal.millisElapsed() > 40){
+            getWorld().removeObject(this);
+        }
     }
 }

@@ -14,6 +14,7 @@ public class GunMiner extends Miner
      */
     public GunMiner(double health, double damage) {
         super(health, damage, 0);
+        //setImage("images/enemies/minerGun.png");
     }
     public void act()
     {
@@ -41,6 +42,18 @@ public class GunMiner extends Miner
         ifHit();
     }
     
+    public void takeDamageBullet() {
+        super.takeDamageBullet();
+        //setImage("images/enemies/minerGunDamaged");
+    }
+    public void takeDamageMelee() {
+        super.takeDamageMelee();
+        //setImage("images/enemies/minerGunDamaged");
+    }
+    public void takeDamagePickaxe() {
+        super.takeDamagePickaxe();
+        //setImage("images/enemies/minerGunDamaged");
+    }
     SimpleTimer hitTimer = new SimpleTimer();
     int bulletCritChance;
 }
