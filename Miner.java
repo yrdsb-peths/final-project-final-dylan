@@ -14,15 +14,16 @@ public class Miner extends Enemy
      */
     EnemySensor detectionCheck;
     Player player;
-    public Miner(double health, double damage, int speed) {
-        super(health, damage, speed);
+    GreenfootImage regular = new GreenfootImage("images/enemies/miner.png");
+    public Miner(double health, int speed) {
+        super(health, speed);
         detectionCheck = new EnemySensor(300);
-        //setImage("images/enemies/miner.png");
+        setImage(regular);
     }
     public void act()
     {
         player = (Player)getWorld().getObjects(Player.class).get(0);
-        
+        getWorld().addObject(detectionCheck, getX(), getY());
         if(engaged == true) {
             turnTowards(player.getX(), player.getY());
             move(speed);
@@ -31,6 +32,9 @@ public class Miner extends Enemy
             }
         } else {
             playerTrack();
+        }
+        if(atkCooldown.millisElapsed() > 1000 && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 20) {
+            attack();
         }
         if(isTouching(Bullet.class)) {
             takeDamageBullet();
@@ -58,23 +62,23 @@ public class Miner extends Enemy
         }
         removeTouching(Bullet.class);
         hitTimer.mark();
-        //setImage("images/enemies/minerDamaged.png");
+        setImage("images/enemies/minerDamaged.png");
     }
     public void takeDamagePickaxe() {
         health -= 70.0 + Greenfoot.getRandomNumber(50);
         removeTouching(HitScanPlayerMine.class);
         hitTimer.mark();
-        //setImage("images/enemies/minerDamaged.png");
+        setImage("images/enemies/minerDamaged.png");
     }
     public void takeDamageMelee() {
         removeTouching(HitScanPlayer.class);
         hitTimer.mark();
         health -= 40.0 + Greenfoot.getRandomNumber(60);
-        //("images/enemies/minerDamaged.png");
+        setImage("images/enemies/minerDamaged.png");
     }
     public void ifHit() {
         if(hitTimer.millisElapsed() >= 200) {
-            //setImage(miner);
+            setImage(regular);
         } 
     }
     public void playerTrack() {
@@ -87,4 +91,14 @@ public class Miner extends Enemy
     }
     
     SimpleTimer atkCooldown = new SimpleTimer();
+    HitScanEnemyMiner enemyHitCheck;
+    public void attack() {
+        atkCooldown.mark();
+        hitTimer.mark();
+        enemyHitCheck = new HitScanEnemyMiner();
+        enemyHitCheck.setRotation(getRotation());
+        getWorld().addObject(enemyHitCheck, getX(), getY());
+        enemyHitCheck.move(6);
+        speed = 0;
+    }
 }

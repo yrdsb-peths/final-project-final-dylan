@@ -15,13 +15,16 @@ public class Zombie extends Enemy
 
     GreenfootImage norZom = new GreenfootImage("images/enemies/zombie.png");
     EnemySensor detectionCheck;
-    Player player;
-    public Zombie(double health, double damage, int speed) {
-        super(health, damage, speed);
+    private int setSpeed;
+    
+    public Zombie(double health, int speed) {
+        super(health, speed);
         setImage(norZom);
+        setSpeed = speed;
         detectionCheck = new EnemySensor(300);
     }
     
+    Player player;
     public void act()
     {
         player = (Player)getWorld().getObjects(Player.class).get(0);
@@ -34,6 +37,9 @@ public class Zombie extends Enemy
             }
         } else {
             playerTrack();
+        }
+        if(atkCooldown.millisElapsed() > 500 && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 20) {
+            attack();
         }
         if(isTouching(Bullet.class)) {
             takeDamageBullet();
@@ -62,6 +68,7 @@ public class Zombie extends Enemy
         removeTouching(HitScanPlayerMine.class);
         hitTimer.mark();
         setImage("images/enemies/zombieDamaged.png");
+        speed = 0;
     }
     int slashCritRoll;
     public void takeDamageMelee() {
@@ -78,15 +85,28 @@ public class Zombie extends Enemy
         if(hitTimer.millisElapsed() >= 200) {
             setImage(norZom);
         } 
+        if(hitTimer.millisElapsed() >= 400 && atkCooldown.millisElapsed() >= 800) {
+            speed = setSpeed;
+        } 
     }
     public void playerTrack() {
         detectionCheck.setLocation((Math.abs(getX() + player.getX()) / 2), (Math.abs(getY() + player.getY()) / 2));
         detectionCheck.scale((int) Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))), 2);
         detectionCheck.turnTowards(player.getX(), player.getY());
-        if(!detectionCheck.isTouching && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 100) {
+        if(!detectionCheck.isTouching && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 150) {
             engaged = true;
         }
     }
     
     SimpleTimer atkCooldown = new SimpleTimer();
+    HitScanEnemyZom enemyHitCheck;
+    public void attack() {
+        atkCooldown.mark();
+        hitTimer.mark();
+        enemyHitCheck = new HitScanEnemyZom();
+        enemyHitCheck.setRotation(getRotation());
+        getWorld().addObject(enemyHitCheck, getX(), getY());
+        enemyHitCheck.move(5);
+        speed = 0;
+    }
 }

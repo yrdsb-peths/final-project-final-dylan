@@ -15,14 +15,14 @@ public class Player extends SmoothMover
     public static int money = 0;
     
     //Basic stats of the player
-    private static double health;
+    public static double health;
     private static int armourLevel;
     private static double speed;
     
     //Equipment the player has
     private boolean pickaxeEquip;
     private boolean gunEquip;
-    private static int ammoCount;    
+    public static int ammoCount;    
     private boolean daggerEquip;
     
     GreenfootImage player = new GreenfootImage("images/character/characterPlayer.png");
@@ -131,16 +131,28 @@ public class Player extends SmoothMover
         }
         mineCooldown();
         
+        //if attacked
+        if(isTouching(HitScanEnemyZom.class)) {
+            meleeAttackedByZom();
+        }
+        if(isTouching(HitScanEnemyMiner.class)) {
+            meleeAttackedByMiner();
+        }
+        if(isTouching(BulletMiner.class)) {
+            shotByMiner();
+        }
+        
         //allows player to track the mouse
         MouseInfo m = Greenfoot.getMouseInfo();
         if(m != null) {
             turnTowards(m.getX(), m.getY());
         }
+        ifHit();
     }
     
     public void shootGun() {
         Bullet bullet = new Bullet();
-        bullet.setRotation(getRotation()+3);
+        bullet.setRotation(getRotation());
         getWorld().addObject(bullet, getX(), getY());
         bullet.move(10);
         ammoCount--;
@@ -159,6 +171,54 @@ public class Player extends SmoothMover
         hitCheckMine = new HitScanPlayerMine();
         hitCheckMine.setRotation(getRotation());
         getWorld().addObject(hitCheckMine, getX(), getY());
-        hitCheckMine.move(9);
+        hitCheckMine.move(15);
+    }
+    
+    SimpleTimer hitTimer = new SimpleTimer();
+    public void meleeAttackedByZom() {
+        removeTouching(HitScanEnemyZom.class);
+        health -= 1 + Greenfoot.getRandomNumber(10);
+        hitTimer.mark();
+        if(pickaxeEquip == true) {
+            //setImage("images/character/characterPlayerPickaxeDamaged.png");
+        } else if(gunEquip == true) {
+            //setImage("images/character/characterPlayerGunDamaged.png");
+        } else if(daggerEquip == true) {
+            //setImage("images/character/characterPlayerDaggerDamaged.png");
+        }
+    }
+    public void meleeAttackedByMiner() {
+        removeTouching(HitScanEnemyMiner.class);
+        health -= 1 + Greenfoot.getRandomNumber(20);
+        hitTimer.mark();
+        if(pickaxeEquip == true) {
+            //setImage("images/character/characterPlayerPickaxeDamaged.png");
+        } else if(gunEquip == true) {
+            //setImage("images/character/characterPlayerGunDamaged.png");
+        } else if(daggerEquip == true) {
+            //setImage("images/character/characterPlayerDaggerDamaged.png");
+        }
+    }
+    public void shotByMiner() {
+        //removeTouching(BulletMiner.class);
+        health -= 1;
+        hitTimer.mark();
+        if(pickaxeEquip == true) {
+            //setImage("images/character/characterPlayerPickaxeDamaged.png");
+        } else if(gunEquip == true) {
+            //setImage("images/character/characterPlayerGunDamaged.png");
+        } else if(daggerEquip == true) {
+            //setImage("images/character/characterPlayerDaggerDamaged.png");
+        }
+    }
+    
+    public void ifHit() {
+        if(hitTimer.millisElapsed() >= 200 && pickaxeEquip == true) {
+            //setImage("images/character/characterPlayerPickaxe.png");
+        } else if(hitTimer.millisElapsed() >= 200 && gunEquip == true) {
+            //setImage("images/character/characterPlayerGun.png");
+        } else if(hitTimer.millisElapsed() >= 200 && daggerEquip == true) {
+            //setImage("images/character/characterPlayerDagger.png");
+        }
     }
 }

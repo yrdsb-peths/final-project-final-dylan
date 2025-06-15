@@ -6,14 +6,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class HitScanEnemy extends Actor
+public class HitScanEnemyZom extends Actor
 {
     /**
      * Act - do whatever the HitScanEnemy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     SimpleTimer removal = new SimpleTimer();
-    public HitScanEnemy() {
+    public HitScanEnemyZom() {
         setImage("images/hitScanBox.png");
         removal.mark();
     }
