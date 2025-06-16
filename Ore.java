@@ -1,28 +1,28 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Ore here.
+ * Ores: The money that you will mine with your pickaxe.  Contains a given health
+ * and value, the latter of which will be added to the total money the player has.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Tam 
+ * @version 6/16/2025
  */
 public class Ore extends Block
 {
-    /**
-     * Act - do whatever the Ore wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public int health;
     public int value;
     public Ore(int health, int value) {
         this.health = health;
         this.value = value;
     }
-    
+
+    //When player creates a hitbox with the pickaxe that intersects with the given ore
     public void pickaxeStrike() {
         removeTouching(HitScanPlayerMine.class);
         health -= 70;
     }
+
+    //When given ore is destroyed
     public void mined() {
         removeTouching(HitScanPlayerMine.class);
         Player.money += value;
