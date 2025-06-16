@@ -13,7 +13,7 @@ public class Copper extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Copper() {
-        super(75 + Greenfoot.getRandomNumber(100), 100 + Greenfoot.getRandomNumber(200));
+        super(75 + Greenfoot.getRandomNumber(100), 10 + Greenfoot.getRandomNumber(20));
         setImage("images/blocks/copperOre.png");
     }
     

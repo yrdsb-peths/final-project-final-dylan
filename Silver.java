@@ -13,7 +13,7 @@ public class Silver extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Silver() {
-        super(300 + Greenfoot.getRandomNumber(400), 1200 + Greenfoot.getRandomNumber(1000));
+        super(300 + Greenfoot.getRandomNumber(400), 200 + Greenfoot.getRandomNumber(100));
         setImage("images/blocks/silverOre.png");
     }
     

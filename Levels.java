@@ -21,6 +21,9 @@ public class Levels extends World
         super(width, height, cellSize); 
     }
     
+    public Levels getLevel() {
+        return this;
+    }
     public int getX() {
         xCoord = player.getX();
         return xCoord;
@@ -28,5 +31,19 @@ public class Levels extends World
     public int getY() {
         yCoord = player.getY();
         return yCoord;
+    }
+    
+    public void finishLevel() {
+        double moneyToPayHealth = 10 * (100 - Player.health);
+        double ammoToPayFor = 30 * (70 - Player.ammoCount);
+        if(Player.money > moneyToPayHealth && Greenfoot.ask("Refill Health for: " + moneyToPayHealth).equals("yes")) {
+            Player.health = 100;
+            Player.money -= moneyToPayHealth;
+        }
+        if(Player.money > ammoToPayFor && Greenfoot.ask("Refill Ammo for: " + ammoToPayFor).equals("yes")) {
+            Player.ammoCount = 70;
+            Player.money -= ammoToPayFor;
+        }
+        Player.trigger = 0;
     }
 }

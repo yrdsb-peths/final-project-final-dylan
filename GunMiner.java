@@ -12,13 +12,17 @@ public class GunMiner extends Miner
      * Act - do whatever the GunMiner wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    Player player;
+    GreenfootImage gunMiner = new GreenfootImage("images/enemies/minerGun.png");
     public GunMiner(double health) {
         super(health, 0);
-        //setImage("images/enemies/minerGun.png");
+        detectionCheck = new EnemySensor(300);
+        setImage(gunMiner);
     }
+    
     public void act()
     {
-        Player player = (Player)getWorld().getObjects(Player.class).get(0);
+        player = (Player)getWorld().getObjects(Player.class).get(0);
         getWorld().addObject(detectionCheck, getX(), getY());
         if(engaged == true) {
             turnTowards(player.getX(), player.getY());
@@ -28,6 +32,9 @@ public class GunMiner extends Miner
             }
         } else {
             playerTrack();
+        }
+        if(atkCooldown.millisElapsed() > 1500 && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 800) {
+            attack();
         }
         if(isTouching(Bullet.class)) {
             takeDamageBullet();
@@ -44,17 +51,18 @@ public class GunMiner extends Miner
         ifHit();
     }
     
+    int bulletCritChance;
     public void takeDamageBullet() {
         super.takeDamageBullet();
-        //setImage("images/enemies/minerGunDamaged");
+        setImage("images/enemies/minerGunDamaged.png");
     }
     public void takeDamageMelee() {
         super.takeDamageMelee();
-        //setImage("images/enemies/minerGunDamaged");
+        setImage("images/enemies/minerGunDamaged.png");
     }
     public void takeDamagePickaxe() {
         super.takeDamagePickaxe();
-        //setImage("images/enemies/minerGunDamaged");
+        setImage("images/enemies/minerGunDamaged.png");
     }
     public void playerTrack() {
         detectionCheck.setLocation((Math.abs(getX() + player.getX()) / 2), (Math.abs(getY() + player.getY()) / 2));
@@ -65,5 +73,18 @@ public class GunMiner extends Miner
         }
     }
     SimpleTimer hitTimer = new SimpleTimer();
-    int bulletCritChance;
+    public void ifHit() {
+        if(hitTimer.millisElapsed() >= 200) {
+            setImage(gunMiner);
+        } 
+    }
+    
+    SimpleTimer atkCooldown = new SimpleTimer();
+    public void attack() {
+        atkCooldown.mark();
+        BulletMiner bullet = new BulletMiner();
+        bullet.setRotation(getRotation());
+        getWorld().addObject(bullet, getX(), getY());
+        bullet.move(10);
+    }
 }

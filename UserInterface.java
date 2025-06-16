@@ -16,6 +16,7 @@ public class UserInterface extends Actor
     Label ammo;
     Label money;
     public UserInterface() {
+        setImage("images/userInterface.png");
         health = new Label("HP: " + Player.health, 20);
         ammo = new Label("Ammo: " + Player.ammoCount, 20);
         money = new Label("Money: " + Player.money, 20);
@@ -23,12 +24,9 @@ public class UserInterface extends Actor
     
     public void act()
     {
-        getWorld().addObject(health, getX(), getY() - 10);
-        health.setLineColor(Color.BLACK);
-        getWorld().addObject(ammo, getX(), getY() + 10);
-        ammo.setLineColor(Color.BLACK);
+        getWorld().addObject(health, getX(), getY() - 10);        
+        getWorld().addObject(ammo, getX(), getY() + 10);        
         getWorld().addObject(money, getX(), getY() + 30);
-        ammo.setLineColor(Color.BLACK);
         health.setValue("HP: " + Player.health);
         ammo.setValue("Ammo: " + Player.ammoCount);
         money.setValue("Money: " + Player.money);

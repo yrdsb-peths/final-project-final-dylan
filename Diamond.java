@@ -13,7 +13,7 @@ public class Diamond extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Diamond() {
-        super(1400 + Greenfoot.getRandomNumber(400), 7000 + Greenfoot.getRandomNumber(2000));
+        super(1400 + Greenfoot.getRandomNumber(400), 700 + Greenfoot.getRandomNumber(200));
         setImage("images/blocks/diamondOre.png");
     }
     

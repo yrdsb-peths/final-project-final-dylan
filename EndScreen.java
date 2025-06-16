@@ -1,27 +1,21 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TitleScreen here.
+ * Write a description of class EndScreen here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class TitleScreen extends World
+public class EndScreen extends World
 {
 
     /**
-     * Constructor for objects of class TitleScreen.
+     * Constructor for objects of class EndScreen.
      * 
      */
-    Block dirt;
-    Block stone;
-    public int xCoord;
-    public int yCoord;
-    Player player;
-    public TitleScreen()
+    public EndScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
-        Player.money = 0;
     }
 }

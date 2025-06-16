@@ -15,10 +15,12 @@ public class Miner extends Enemy
     EnemySensor detectionCheck;
     Player player;
     GreenfootImage regular = new GreenfootImage("images/enemies/miner.png");
+    private int setSpeed;
     public Miner(double health, int speed) {
         super(health, speed);
         detectionCheck = new EnemySensor(300);
         setImage(regular);
+        setSpeed = speed;
     }
     public void act()
     {
@@ -79,6 +81,9 @@ public class Miner extends Enemy
     public void ifHit() {
         if(hitTimer.millisElapsed() >= 200) {
             setImage(regular);
+        } 
+        if(hitTimer.millisElapsed() >= 400 && atkCooldown.millisElapsed() >= 800) {
+            speed = setSpeed;
         } 
     }
     public void playerTrack() {

@@ -148,6 +148,10 @@ public class Player extends SmoothMover
             turnTowards(m.getX(), m.getY());
         }
         ifHit();
+        
+        if(isTouching(WorldTransition.class)) {
+            finishLevel();
+        }
     }
     
     public void shootGun() {
@@ -200,8 +204,8 @@ public class Player extends SmoothMover
         }
     }
     public void shotByMiner() {
-        //removeTouching(BulletMiner.class);
-        health -= 1;
+        removeTouching(BulletMiner.class);
+        health -= 20 + Greenfoot.getRandomNumber(30);
         hitTimer.mark();
         if(pickaxeEquip == true) {
             //setImage("images/character/characterPlayerPickaxeDamaged.png");
@@ -220,5 +224,10 @@ public class Player extends SmoothMover
         } else if(hitTimer.millisElapsed() >= 200 && daggerEquip == true) {
             //setImage("images/character/characterPlayerDagger.png");
         }
+    }
+    
+    public static int trigger = 0;
+    public void finishLevel() {
+        trigger = 1;
     }
 }

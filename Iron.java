@@ -13,7 +13,7 @@ public class Iron extends Ore
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Iron() {
-        super(500 + Greenfoot.getRandomNumber(500), 200 + Greenfoot.getRandomNumber(200));
+        super(500 + Greenfoot.getRandomNumber(500), 40 + Greenfoot.getRandomNumber(20));
         setImage("images/blocks/ironOre.png");
     }
     
