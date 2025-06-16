@@ -48,6 +48,7 @@ public class Miner extends Enemy
             takeDamagePickaxe();
         }
         if(health <= 0) {
+            getWorld().addObject(new HealthDrop(), getX(), getY());
             getWorld().removeObject(this);
         }
         ifHit();

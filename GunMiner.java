@@ -26,15 +26,11 @@ public class GunMiner extends Miner
         getWorld().addObject(detectionCheck, getX(), getY());
         if(engaged == true) {
             turnTowards(player.getX(), player.getY());
-            move(speed);
-            if(isTouching(Block.class)) {
-                move(-speed);
+            if(atkCooldown.millisElapsed() > 1500 && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 800) {
+                attack();
             }
         } else {
             playerTrack();
-        }
-        if(atkCooldown.millisElapsed() > 1500 && Math.hypot(Math.abs(getExactX() - player.getX()), (Math.abs(getExactY() - player.getY()))) < 800) {
-            attack();
         }
         if(isTouching(Bullet.class)) {
             takeDamageBullet();
@@ -46,6 +42,7 @@ public class GunMiner extends Miner
             takeDamagePickaxe();
         }
         if(health <= 0) {
+            getWorld().addObject(new AmmoDrop(), getX(), getY());
             getWorld().removeObject(this);
         }
         ifHit();
@@ -53,15 +50,26 @@ public class GunMiner extends Miner
     
     int bulletCritChance;
     public void takeDamageBullet() {
-        super.takeDamageBullet();
+        bulletCritChance = Greenfoot.getRandomNumber(50);
+        if(Greenfoot.getRandomNumber(50) == bulletCritChance) {
+            health -= 1000.0;
+        } else {
+            health -= 80.0;
+        }
+        removeTouching(Bullet.class);
+        hitTimer.mark();
         setImage("images/enemies/minerGunDamaged.png");
     }
     public void takeDamageMelee() {
-        super.takeDamageMelee();
+        health -= 160.0 + Greenfoot.getRandomNumber(50);
+        removeTouching(HitScanPlayerMine.class);
+        hitTimer.mark();
         setImage("images/enemies/minerGunDamaged.png");
     }
     public void takeDamagePickaxe() {
-        super.takeDamagePickaxe();
+        removeTouching(HitScanPlayer.class);
+        hitTimer.mark();
+        health -= 40.0 + Greenfoot.getRandomNumber(60);
         setImage("images/enemies/minerGunDamaged.png");
     }
     public void playerTrack() {

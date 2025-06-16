@@ -54,7 +54,6 @@ public class Player extends SmoothMover
     public Player() {
         setImage(player);
         health = 100.0;
-        armourLevel = 0;
         speed = 1.5;
         
         pickaxeEquip = true;
@@ -109,7 +108,7 @@ public class Player extends SmoothMover
             setImage(playerKnife);
         }
         
-        //attack mechanisms
+        //attack mechanisms, specifically cooldowns
         if(gunEquip == true && gunCooldown == false && Greenfoot.mouseClicked(null)) {
             if(ammoCount > 0) {
                 shootGun();
@@ -131,7 +130,7 @@ public class Player extends SmoothMover
         }
         mineCooldown();
         
-        //if attacked
+        //Methods that are called upon attacked
         if(isTouching(HitScanEnemyZom.class)) {
             meleeAttackedByZom();
         }
@@ -152,8 +151,24 @@ public class Player extends SmoothMover
         if(isTouching(WorldTransition.class)) {
             finishLevel();
         }
+        if(isTouching(HealthDrop.class)) {
+            health += (10 + Greenfoot.getRandomNumber(10));
+            removeTouching(HealthDrop.class);
+        }
+        if(isTouching(AmmoDrop.class)) {
+            ammoCount += (1 + Greenfoot.getRandomNumber(10));   
+            removeTouching(AmmoDrop.class);
+        }
+        
+        if(health <= 0) {
+            EndScreen deadEndScreen = new EndScreen();
+            Greenfoot.setWorld(deadEndScreen);
+        }
     }
     
+    /**
+     * Various Methods that dictate how the Player attacks/mines
+     */
     public void shootGun() {
         Bullet bullet = new Bullet();
         bullet.setRotation(getRotation());
@@ -178,6 +193,9 @@ public class Player extends SmoothMover
         hitCheckMine.move(15);
     }
     
+    /**
+     * Various Methods that dictate how the Player should react if attacked by different enemies
+     */
     SimpleTimer hitTimer = new SimpleTimer();
     public void meleeAttackedByZom() {
         removeTouching(HitScanEnemyZom.class);
@@ -226,6 +244,9 @@ public class Player extends SmoothMover
         }
     }
     
+    /**
+     * Method that allows the world to be toggled
+     */
     public static int trigger = 0;
     public void finishLevel() {
         trigger = 1;

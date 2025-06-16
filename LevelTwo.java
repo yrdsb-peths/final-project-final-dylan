@@ -40,17 +40,71 @@ public class LevelTwo extends Levels
     Zombie zombie;
     Miner miner;
     public void prepareEntities() {
-        addObject(new Zombie(150, 1), 170, 270);
-        addObject(new Zombie(150, 1), 235, 320);
-        addObject(new Zombie(150, 1), 235, 360);
-        addObject(new Zombie(150, 1), 240, 460);
-        
+        addObject(new Zombie(150, 2), 170, 270);
+        addObject(new Zombie(150, 2), 235, 320);
+        addObject(new Zombie(150, 2), 235, 360);
+        addObject(new Zombie(150, 2), 240, 460);
         addObject(new Miner(150, 1), 110, 365);
         addObject(new Miner(150, 1), 410, 365);
         addObject(new Miner(150, 1), 470, 395);
         addObject(new Miner(150, 1), 470, 495);
         addObject(new GunMiner(150), 402, 525);
         addObject(new GunMiner(150), 402, 655);
+        addObject(new GunMiner(150), 442, 205);
+        addObject(new Miner(150, 1), 482, 205);
+        addObject(new Miner(150, 1), 482, 45);
+        addObject(new Miner(150, 1), 452, 105);
+        
+        addObject(new Miner(200, 1), 252, 45);
+        addObject(new Miner(200, 1), 352, 45);
+        addObject(new Miner(200, 1), 322, 75);
+        addObject(new Zombie(150, 2), 225, 160);
+        addObject(new Miner(200, 1), 144, 75);
+        addObject(new Miner(200, 1), 154, 145);
+        addObject(new GunMiner(250), 322, 145);
+        
+        addObject(new Miner(200, 1), 326, 245);
+        addObject(new Miner(200, 1), 326, 285);
+        addObject(new Miner(200, 1), 326, 205);
+        addObject(new Miner(200, 1), 56, 230);
+        addObject(new Miner(200, 1), 126, 230);
+        
+        addObject(new Miner(200, 1), 126, 485);
+        addObject(new Miner(200, 1), 146, 485);
+        addObject(new Miner(200, 1), 56, 505);
+        addObject(new Miner(200, 1), 76, 510);
+        addObject(new Miner(200, 1), 356, 510);
+        
+        addObject(new Miner(200, 1), 36, 670);
+        addObject(new Miner(200, 1), 36, 570);
+        addObject(new Miner(200, 1), 36, 630);
+        addObject(new Miner(200, 1), 126, 642);
+        addObject(new Miner(200, 1), 165, 632);
+        addObject(new GunMiner(250), 70, 670);
+        
+        addObject(new Miner(200, 1), 495, 640);
+        addObject(new Miner(200, 1), 455, 640);
+        addObject(new Miner(200, 1), 445, 580);
+        addObject(new Miner(200, 1), 535, 570);
+        addObject(new Miner(200, 1), 635, 570);
+        addObject(new GunMiner(300), 565, 670);
+        addObject(new Miner(200, 1), 635, 670);
+        addObject(new GunMiner(300), 630, 495);
+        addObject(new GunMiner(300), 680, 495);
+        
+        addObject(new GunMiner(300), 550, 365);
+        addObject(new GunMiner(300), 550, 40);
+        addObject(new GunMiner(300), 670, 95);
+        addObject(new Miner(300, 1), 670, 175);
+        addObject(new Miner(300, 1), 635, 205);
+        addObject(new Miner(300, 1), 575, 180);
+        addObject(new Miner(300, 1), 545, 210);
+        addObject(new Miner(300, 1), 605, 150);
+        addObject(new Miner(300, 1), 605, 270);
+        addObject(new Miner(300, 1), 605, 70);
+        addObject(new Miner(300, 1), 635, 70);
+        addObject(new Miner(300, 1), 635, 395);
+        addObject(new Miner(300, 1), 605, 455);
     }
     Ore Copper;
     Ore Iron;
@@ -98,6 +152,8 @@ public class LevelTwo extends Levels
         addObject(new Iron(), 380, 585);
         addObject(new Iron(), 410, 585);
         addObject(new Iron(), 410, 585);
+        addObject(new Silver(), 450, 65);
+        addObject(new Silver(), 480, 85);
         
         addObject(new Copper(), 28, 485);
         addObject(new Copper(), 28, 485);
