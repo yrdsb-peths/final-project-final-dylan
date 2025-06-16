@@ -22,12 +22,6 @@ public class Diamond extends Ore
         if(isTouching(HitScanPlayerMine.class) && health > 0) {
             pickaxeStrike();
         }
-        if(health < health * (2 / 3)) {
-            //setImage("images/blocks/diamondOreBreaking.png");
-        }
-        if(health < health / 3) {
-            //setImage("images/blocks/diamondOreBreaking2.png");
-        }
         if(health <= 0) {
             mined();
         }

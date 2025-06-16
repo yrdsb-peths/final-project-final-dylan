@@ -22,9 +22,6 @@ public class Copper extends Ore
         if(isTouching(HitScanPlayerMine.class) && health > 0) {
             pickaxeStrike();
         }
-        if(health < health / 2) {
-            //setImage("images/blocks/copperOreBreaking.png");
-        }
         if(health <= 0) {
             mined();
         }

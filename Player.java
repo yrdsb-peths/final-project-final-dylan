@@ -146,7 +146,6 @@ public class Player extends SmoothMover
         if(m != null) {
             turnTowards(m.getX(), m.getY());
         }
-        ifHit();
         
         if(isTouching(WorldTransition.class)) {
             finishLevel();
@@ -178,7 +177,6 @@ public class Player extends SmoothMover
     }
     HitScanPlayerMelee hitCheckMelee;
     public void stab() {
-        //animate a stab motion
         hitCheckMelee = new HitScanPlayerMelee();
         hitCheckMelee.setRotation(getRotation());
         getWorld().addObject(hitCheckMelee, getX(), getY());
@@ -186,7 +184,6 @@ public class Player extends SmoothMover
     }
     HitScanPlayerMine hitCheckMine;
     public void mine() {
-        //animate mine motion
         hitCheckMine = new HitScanPlayerMine();
         hitCheckMine.setRotation(getRotation());
         getWorld().addObject(hitCheckMine, getX(), getY());
@@ -201,47 +198,16 @@ public class Player extends SmoothMover
         removeTouching(HitScanEnemyZom.class);
         health -= 1 + Greenfoot.getRandomNumber(10);
         hitTimer.mark();
-        if(pickaxeEquip == true) {
-            //setImage("images/character/characterPlayerPickaxeDamaged.png");
-        } else if(gunEquip == true) {
-            //setImage("images/character/characterPlayerGunDamaged.png");
-        } else if(daggerEquip == true) {
-            //setImage("images/character/characterPlayerDaggerDamaged.png");
-        }
     }
     public void meleeAttackedByMiner() {
         removeTouching(HitScanEnemyMiner.class);
         health -= 1 + Greenfoot.getRandomNumber(20);
         hitTimer.mark();
-        if(pickaxeEquip == true) {
-            //setImage("images/character/characterPlayerPickaxeDamaged.png");
-        } else if(gunEquip == true) {
-            //setImage("images/character/characterPlayerGunDamaged.png");
-        } else if(daggerEquip == true) {
-            //setImage("images/character/characterPlayerDaggerDamaged.png");
-        }
     }
     public void shotByMiner() {
         removeTouching(BulletMiner.class);
         health -= 20 + Greenfoot.getRandomNumber(30);
         hitTimer.mark();
-        if(pickaxeEquip == true) {
-            //setImage("images/character/characterPlayerPickaxeDamaged.png");
-        } else if(gunEquip == true) {
-            //setImage("images/character/characterPlayerGunDamaged.png");
-        } else if(daggerEquip == true) {
-            //setImage("images/character/characterPlayerDaggerDamaged.png");
-        }
-    }
-    
-    public void ifHit() {
-        if(hitTimer.millisElapsed() >= 200 && pickaxeEquip == true) {
-            //setImage("images/character/characterPlayerPickaxe.png");
-        } else if(hitTimer.millisElapsed() >= 200 && gunEquip == true) {
-            //setImage("images/character/characterPlayerGun.png");
-        } else if(hitTimer.millisElapsed() >= 200 && daggerEquip == true) {
-            //setImage("images/character/characterPlayerDagger.png");
-        }
     }
     
     /**
