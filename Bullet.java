@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Bullet here.
+ * Bullet: The player's ranged projectile accessed through their gun.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Tam
+ * @version 6/16/2025
  */
 public class Bullet extends SmoothMover
 {
-    /**
-     * Act - do whatever the Bullet wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public Bullet() {
         setImage("images/bullet.png");
     }
@@ -19,6 +15,8 @@ public class Bullet extends SmoothMover
     public void act()
     {
         move(10);
+        //If the bullet is at the edge of the world or collides with a
+        //block class, it will delete itself
         if(isAtEdge()) {
             getWorld().removeObject(this);
         } else if(isTouching(Block.class)) {
