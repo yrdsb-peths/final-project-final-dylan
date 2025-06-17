@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class BulletMiner here.
+ * BulletMiner: The bullet that is created by the GunMiner, will kill you!
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Tam
+ * @version 6/16/2025
  */
 public class BulletMiner extends SmoothMover
 {
-    /**
-     * Act - do whatever the BulletMiner wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public BulletMiner() {
         setImage("images/bullet.png");
     }

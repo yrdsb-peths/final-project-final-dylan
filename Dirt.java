@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Dirt here.
+ * Dirt: barrier, cannot cross
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -17,10 +17,5 @@ public class Dirt extends Block
     public Dirt(int w, int h) {
         dirt.scale(w, h);
         setImage(dirt);
-    }
-    
-    public void act()
-    {
-        
     }
 }

@@ -1,22 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class LevelOne here.
+ * First Level
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Tam
+ * @version 6/16/2025
  */
 public class LevelOne extends Levels
 {
-
-    /**
-     * Constructor for objects of class LevelOne.
-     * 
-     */
     GreenfootImage level1 = new GreenfootImage("images/level 1.png");
     Block dirt;
     Block stone;
     Player player;
+    
     public LevelOne()
     {    
         super(600, 500, 1); 
@@ -36,7 +32,10 @@ public class LevelOne extends Levels
             finishLevel();
         }
     }
-    
+
+    /**
+     * This method is to add all the enemies.
+     */
     Zombie zombie;
     Miner miner;
     private void prepareEntities() {
@@ -66,6 +65,9 @@ public class LevelOne extends Levels
         addObject(new Miner(150.0, 1), 560, 246);
     }
 
+    /**
+     * This method is to place all ores in the Map.
+     */
     Ore copper;
     Ore iron;
     Ore silver;
@@ -131,6 +133,9 @@ public class LevelOne extends Levels
         addObject(new Silver(), 420, 34);
     }
 
+    /**
+     * This method is to place all barriers that the player cannot cross.
+     */
     private void prepareBlocks() {
         dirt = new Dirt(5, 125);
         addObject(dirt, 9, 143);
@@ -201,6 +206,7 @@ public class LevelOne extends Levels
         addObject(stone, 381, 170);
     }
 
+    //to go from level 1 to level 2
     public void finishLevel() {
         super.finishLevel();
         LevelTwo levelTwo = new LevelTwo();

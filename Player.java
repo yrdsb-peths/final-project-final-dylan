@@ -1,22 +1,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Player here.
+ * Player: The main character that you control.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Tam
+ * @version 6/16/2025
  */
 public class Player extends SmoothMover
-{
-    /**
-     * Act - do whatever the Player wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public static int money = 0;
-    
+{    
     //Basic stats of the player
     public static double health;
-    private static int armourLevel;
+    public static int money = 0;
     private static double speed;
     
     //Equipment the player has
@@ -29,27 +23,6 @@ public class Player extends SmoothMover
     GreenfootImage playerPick = new GreenfootImage("images/character/characterPlayerPickaxe.png");
     GreenfootImage playerGun = new GreenfootImage("images/character/characterPlayerGun.png");
     GreenfootImage playerKnife = new GreenfootImage("images/character/characterPlayerKnife.png");
-    
-    //Cooldowns for attacking
-    SimpleTimer atkCooldown = new SimpleTimer();
-    private boolean gunCooldown;
-    private void gunCooldown() {
-        if(atkCooldown.millisElapsed() > 400) {
-            gunCooldown = false;
-        }
-    }
-    private boolean mineCooldown;
-    private void mineCooldown() {
-        if(atkCooldown.millisElapsed() > 750) {
-            mineCooldown = false;
-        }
-    }
-    private boolean stabCooldown;
-    private void stabCooldown() {
-        if(atkCooldown.millisElapsed() > 250) {
-            stabCooldown = false;
-        }
-    }
     
     public Player() {
         setImage(player);
@@ -146,10 +119,13 @@ public class Player extends SmoothMover
         if(m != null) {
             turnTowards(m.getX(), m.getY());
         }
-        
+
+        //allows Player to transition from one world into the next
         if(isTouching(WorldTransition.class)) {
             finishLevel();
         }
+
+        //droppables mechanism: if taken it will help you
         if(isTouching(HealthDrop.class)) {
             health += (10 + Greenfoot.getRandomNumber(10));
             removeTouching(HealthDrop.class);
@@ -159,6 +135,7 @@ public class Player extends SmoothMover
             removeTouching(AmmoDrop.class);
         }
         
+        //death mechanism
         if(health <= 0) {
             EndScreen deadEndScreen = new EndScreen();
             Greenfoot.setWorld(deadEndScreen);
@@ -166,7 +143,7 @@ public class Player extends SmoothMover
     }
     
     /**
-     * Various Methods that dictate how the Player attacks/mines
+     * Various Methods that dictate how the Player attacks/mines.
      */
     GreenfootSound gunShoot = new GreenfootSound("sounds/gunShoot1.wav");
     public void shootGun() {
@@ -199,7 +176,29 @@ public class Player extends SmoothMover
     }
     
     /**
-     * Various Methods that dictate how the Player should react if attacked by different enemies
+     * Various methods that dictate how attacking should be spaced out.
+     */
+    SimpleTimer atkCooldown = new SimpleTimer();
+    private boolean gunCooldown;
+    private void gunCooldown() {
+        if(atkCooldown.millisElapsed() > 400) {
+            gunCooldown = false;
+        }
+    }
+    private boolean mineCooldown;
+    private void mineCooldown() {
+        if(atkCooldown.millisElapsed() > 750) {
+            mineCooldown = false;
+        }
+    }
+    private boolean stabCooldown;
+    private void stabCooldown() {
+        if(atkCooldown.millisElapsed() > 250) {
+            stabCooldown = false;
+        }
+    }
+    /**
+     * Various Methods that dictate how the Player should react if attacked by different enemies.
      */
     SimpleTimer hitTimer = new SimpleTimer();
     public void meleeAttackedByZom() {
@@ -219,7 +218,7 @@ public class Player extends SmoothMover
     }
     
     /**
-     * Method that allows the world to be toggled
+     * Method that allows the world to be toggled from one to the next through a static variable.
      */
     public static int trigger = 0;
     public void finishLevel() {
