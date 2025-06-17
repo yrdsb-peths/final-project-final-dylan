@@ -63,14 +63,25 @@ public class Zombie extends Enemy
         hitTimer.mark();
         setImage("images/enemies/zombieDamaged.png");
     }
+    GreenfootSound mineZombie = new GreenfootSound("sounds/miningStab1.wav");
+    GreenfootSound mineZombie2 = new GreenfootSound("sounds/miningStab2.wav");
     public void takeDamagePickaxe() {
         health -= 140.0 + Greenfoot.getRandomNumber(100);
         removeTouching(HitScanPlayerMine.class);
         hitTimer.mark();
         setImage("images/enemies/zombieDamaged.png");
+        if(Greenfoot.getRandomNumber(100) % 2 == 0) {
+            mineZombie.setVolume(70);
+            mineZombie.play();
+        } else {
+            mineZombie2.setVolume(70);
+            mineZombie2.play();
+        }
         speed = 0;
     }
     int slashCritRoll;
+    GreenfootSound stabZombie = new GreenfootSound("sounds/daggerStab1.wav");
+    GreenfootSound stabZombie2 = new GreenfootSound("sounds/daggerStab2.wav");
     public void takeDamageMelee() {
         slashCritRoll = Greenfoot.getRandomNumber(50);
         removeTouching(HitScanPlayer.class);
@@ -78,7 +89,14 @@ public class Zombie extends Enemy
         if(Greenfoot.getRandomNumber(50) == slashCritRoll) {
             health -= 1000.0;
         }
-        health -= 30.0;
+        health -= 50.0;
+        if(Greenfoot.getRandomNumber(100) % 2 == 0) {
+            stabZombie.setVolume(70);
+            stabZombie.play();
+        } else {
+            stabZombie2.setVolume(70);
+            stabZombie2.play();
+        }
         setImage("images/enemies/zombieDamaged.png");
     }
     public void ifHit() {

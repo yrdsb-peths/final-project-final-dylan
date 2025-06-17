@@ -67,16 +67,34 @@ public class Miner extends Enemy
         hitTimer.mark();
         setImage("images/enemies/minerDamaged.png");
     }
+    GreenfootSound mineMiner = new GreenfootSound("sounds/miningStab1.wav");
+    GreenfootSound mineMiner2 = new GreenfootSound("sounds/miningStab2.wav");
     public void takeDamagePickaxe() {
         health -= 70.0 + Greenfoot.getRandomNumber(50);
         removeTouching(HitScanPlayerMine.class);
         hitTimer.mark();
+        if(Greenfoot.getRandomNumber(100) % 2 == 0) {
+            mineMiner.setVolume(70);
+            mineMiner.play();
+        } else {
+            mineMiner2.setVolume(70);
+            mineMiner2.play();
+        }
         setImage("images/enemies/minerDamaged.png");
     }
+    GreenfootSound stabMiner1 = new GreenfootSound("sounds/daggerStab1.wav");
+    GreenfootSound stabMiner2 = new GreenfootSound("sounds/daggerStab2.wav");
     public void takeDamageMelee() {
         removeTouching(HitScanPlayer.class);
         hitTimer.mark();
         health -= 40.0 + Greenfoot.getRandomNumber(60);
+        if(Greenfoot.getRandomNumber(100) % 2 == 0) {
+            stabMiner1.setVolume(70);
+            stabMiner1.play();
+        } else {
+            stabMiner2.setVolume(70);
+            stabMiner2.play();
+        }
         setImage("images/enemies/minerDamaged.png");
     }
     public void ifHit() {

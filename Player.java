@@ -53,7 +53,7 @@ public class Player extends SmoothMover
     
     public Player() {
         setImage(player);
-        health = 100.0;
+        health = 200.0;
         speed = 1.5;
         
         pickaxeEquip = true;
@@ -168,19 +168,25 @@ public class Player extends SmoothMover
     /**
      * Various Methods that dictate how the Player attacks/mines
      */
+    GreenfootSound gunShoot = new GreenfootSound("sounds/gunShoot1.wav");
     public void shootGun() {
         Bullet bullet = new Bullet();
         bullet.setRotation(getRotation());
         getWorld().addObject(bullet, getX(), getY());
         bullet.move(10);
+        gunShoot.setVolume(70);
+        gunShoot.play();
         ammoCount--;
     }
     HitScanPlayerMelee hitCheckMelee;
+    GreenfootSound meleeAttempt = new GreenfootSound("sounds/meleeAttempt.wav");
     public void stab() {
         hitCheckMelee = new HitScanPlayerMelee();
         hitCheckMelee.setRotation(getRotation());
         getWorld().addObject(hitCheckMelee, getX(), getY());
         hitCheckMelee.move(9);
+        meleeAttempt.setVolume(70);
+        meleeAttempt.play();
     }
     HitScanPlayerMine hitCheckMine;
     public void mine() {
@@ -188,6 +194,8 @@ public class Player extends SmoothMover
         hitCheckMine.setRotation(getRotation());
         getWorld().addObject(hitCheckMine, getX(), getY());
         hitCheckMine.move(15);
+        meleeAttempt.setVolume(70);
+        meleeAttempt.play();
     }
     
     /**

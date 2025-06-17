@@ -34,10 +34,10 @@ public class Levels extends World
     }
     
     public void finishLevel() {
-        double moneyToPayHealth = 10 * (100 - Player.health);
+        double moneyToPayHealth = 20 * (200 - Player.health);
         double ammoToPayFor = 30 * (70 - Player.ammoCount);
         if(Player.money > moneyToPayHealth && Greenfoot.ask("Refill Health for: " + moneyToPayHealth).equals("yes")) {
-            Player.health = 100;
+            Player.health = 200;
             Player.money -= moneyToPayHealth;
         }
         if(Player.money > ammoToPayFor && Greenfoot.ask("Refill Ammo for: " + ammoToPayFor).equals("yes")) {
